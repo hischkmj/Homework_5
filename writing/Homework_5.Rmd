@@ -14,4 +14,5 @@ knitr::opts_chunk$set(echo = TRUE, errors = FALSE)
 ```{r Loading in Homicide Data}
 library(readr)
 homicides <- read_csv("../data/homicide-data.csv")
+
 ```
