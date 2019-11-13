@@ -13,6 +13,43 @@ knitr::opts_chunk$set(echo = TRUE, errors = FALSE)
 
 ```{r Loading in Homicide Data}
 library(readr)
+library(dplyr)
 homicides <- read_csv("../data/homicide-data.csv")
 
+homicides <- homicides %>% 
+  mutate(city_name = paste(city, state, sep = ", "))
+
 ```
+
+```{r}
+library(tidyr)
+library(purrr)
+library(forcats)
+library(lubridate)
+
+
+unsolved <- homicides %>% 
+  filter(city_name == "Baltimore, MD") %>% 
+  mutate(reported_date = ymd(reported_date)) %>% 
+  mutate(colder_vs_warmer_months = month(reported_date) == "11" |
+                                   month(reported_date) == "12" |
+                                   month(reported_date) == "1"  |
+                                   month(reported_date) == "2"  |
+                                   month(reported_date) == "3"  |
+                                   month(reported_date) == "4",
+         month_data = month(reported_date)) %>% 
+  group_by(month_data)
+  
+  #mutate(colder_vs_warmer_months = as.factor(colder_vs_warmer_months),
+         #colder_vs_warmer_months = fct_recode(colder_vs_warmer_months,
+                                              #"Summer" = "FALSE",
+                                              #"Winter" = "TRUE"))
+  
+  #group_by(city_name) %>% 
+  
+  #summarize(unsolved_cases = sum(disposition == "Closed without arrest" |
+                                 #disposition == "Open/No arrest"), 
+            #total_cases = sum(disposition == "Closed by arrest") 
+                                              #+ unsolved_cases)
+```
+
