@@ -2,7 +2,10 @@
 title: "Homework_5"
 author: "Molly Hischke"
 date: "11/6/2019"
-output: html_document
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include = FALSE}
@@ -59,7 +62,7 @@ baltimore_homicides <- homicides %>%
 
 ## Homicides in Baltimore, MD Graph
 
-```{r ggplot, fig.height = 3, fig.width = 10}
+```{r ggplot, fig.height = 2, fig.width = 8}
 library(ggplot2)
 
 baltimore_homicides %>% 
