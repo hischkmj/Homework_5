@@ -28,7 +28,7 @@ library(forcats)
 library(lubridate)
 
 
-unsolved <- homicides %>% 
+baltimore_homicides <- homicides %>% 
   filter(city_name == "Baltimore, MD") %>% 
   mutate(reported_date = ymd(reported_date)) %>% 
   mutate(month_data = month(reported_date),
