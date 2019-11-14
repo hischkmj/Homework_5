@@ -21,9 +21,8 @@ homicides <- homicides %>%
 
 ```
 
-```{r}
+```{r, fig.height = 2, fig.width = 15}
 library(tidyr)
-library(purrr)
 library(forcats)
 library(lubridate)
 
@@ -31,25 +30,27 @@ library(lubridate)
 unsolved <- homicides %>% 
   filter(city_name == "Baltimore, MD") %>% 
   mutate(reported_date = ymd(reported_date)) %>% 
-  mutate(colder_vs_warmer_months = month(reported_date) == "11" |
-                                   month(reported_date) == "12" |
-                                   month(reported_date) == "1"  |
-                                   month(reported_date) == "2"  |
-                                   month(reported_date) == "3"  |
-                                   month(reported_date) == "4",
-         month_data = month(reported_date)) %>% 
-  group_by(month_data)
+  mutate(month_data = month(reported_date),
+         year_data = year(reported_date)) %>% 
+  group_by(month_data, year_data) %>% 
+  summarize(total = n()) %>% 
+  arrange(year_data) %>% 
+  mutate(date = paste(month_data, year_data, sep = "-1-"),
+         date = mdy(date)) %>% 
+  mutate(colder_vs_warmer_months = month(month_data) == "11" |
+                                   month(month_data) == "12" |
+                                   month(month_data) == "1"  |
+                                   month(month_data) == "2"  |
+                                   month(month_data) == "3"  |
+                                   month(month_data) == "4") 
+  #mutate(date = as.factor(month_data, levels = month))
+         #year_data = as.factor(year_data))
   
-  #mutate(colder_vs_warmer_months = as.factor(colder_vs_warmer_months),
+  #mutate(colder_vs_warmer_months = as.factor(colder_vs_warmer_months)) #,
          #colder_vs_warmer_months = fct_recode(colder_vs_warmer_months,
-                                              #"Summer" = "FALSE",
+                                             # "Summer" = "FALSE",
                                               #"Winter" = "TRUE"))
-  
-  #group_by(city_name) %>% 
-  
-  #summarize(unsolved_cases = sum(disposition == "Closed without arrest" |
-                                 #disposition == "Open/No arrest"), 
-            #total_cases = sum(disposition == "Closed by arrest") 
-                                              #+ unsolved_cases)
+
+
 ```
 
