@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, errors = FALSE)
 ```
 
-## Loading in Homicide Data
+## Read in Homicide Data
 
 ```{r Loading in Homicide Data}
 library(readr)
@@ -20,6 +20,7 @@ homicides <- homicides %>%
   mutate(city_name = paste(city, state, sep = ", "))
 
 ```
+
 ## Cleaning the data
 
 ```{r Cleaning the data}
@@ -35,7 +36,6 @@ baltimore_homicides <- homicides %>%
          year_data = year(reported_date)) %>% 
   group_by(month_data, year_data) %>% 
   summarize(total = n()) %>% 
-  #arrange(year_data) %>% 
   mutate(date = paste(month_data, year_data, sep = "-1-"),
          date = mdy(date)) %>% 
   mutate(colder_vs_warmer_months = month(month_data) == "11" |
@@ -63,7 +63,7 @@ baltimore_homicides %>%
              size = 1.3) +
   geom_text(aes(x = ymd("2015-4-1"), label = "Arrest of \nFreddie Gray", 
                 y = 40), colour = "gray80", hjust = "right") +
-  geom_smooth(span = 0.1 , se = FALSE) +
+  geom_smooth(span = 0.1 , se = FALSE) + 
   labs(x = "Date",
        y = "Monthly homicides",
        title = "Homicides in Baltimore, MD",
