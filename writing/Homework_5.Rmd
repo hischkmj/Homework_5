@@ -43,17 +43,26 @@ baltimore_homicides <- homicides %>%
                                    month(month_data) == "1"  |
                                    month(month_data) == "2"  |
                                    month(month_data) == "3"  |
-                                   month(month_data) == "4") 
-  mutate(colder_vs_warmer_months = as.factor(colder_vs_warmer_months),
-         colder_vs_warmer_months = fct_recode(colder_vs_warmer_months,
-                                              "Summer" = "FALSE",
-                                              "Winter" = "TRUE"))
+                                   month(month_data) == "4",
+         colder_vs_warmer_months = factor(colder_vs_warmer_months, 
+                                          levels = c(TRUE, FALSE),
+                                          labels = c("Summer", "Winter"))) # Summer = FALSE 
 
 ```
 
 ## Homicides in Baltimore, MD Graph
 
-```{r ggplot, fig.height = 2.5, fig.width = 10}
+```{r ggplot, fig.height = 2, fig.width = 10}
 library(ggplot2)
+
+baltimore_homicides %>% 
+  ggplot(aes(x = date, y = total, fill = colder_vs_warmer_months)) +
+  geom_col() +
+  labs(x = "Date",
+       y = "Monthly homicides",
+       title = "Homicides in Baltimore, MD",
+       fill = "") +
+  scale_fill_manual(values = c("lightblue", "gray")) + 
+  theme_dark()
 ```
 
