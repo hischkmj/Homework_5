@@ -20,8 +20,9 @@ homicides <- homicides %>%
   mutate(city_name = paste(city, state, sep = ", "))
 
 ```
+## Cleaning the data
 
-```{r, fig.height = 2, fig.width = 15}
+```{r Cleaning the data}
 library(tidyr)
 library(forcats)
 library(lubridate)
@@ -47,7 +48,6 @@ unsolved <- homicides %>%
          colder_vs_warmer_months = fct_recode(colder_vs_warmer_months,
                                               "Summer" = "FALSE",
                                               "Winter" = "TRUE"))
-
 
 ```
 
