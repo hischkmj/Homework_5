@@ -5,9 +5,15 @@ date: "11/6/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, errors = FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, include = TRUE, warning = FALSE, 
+                      message = FALSE, errors = FALSE)
 ```
+
+## HOMEWORK QUESTIONS:
+(1) What kind of information should be included in the README.md?
+(2) I rigged the dates to work in the graph. See line 45/46. Is this okay? Other ways of doing?
+(3) For geom_smooth, does this line need to be thicker? I can't get size to work. See line 72
 
 ## Read in Homicide Data
 
@@ -36,7 +42,7 @@ baltimore_homicides <- homicides %>%
          year_data = year(reported_date)) %>% 
   group_by(month_data, year_data) %>% 
   summarize(total = n()) %>% 
-  mutate(date = paste(month_data, year_data, sep = "-1-"),
+  mutate(date = paste(month_data, year_data, sep = "-1-"), ## QUESTION 2
          date = mdy(date)) %>% 
   mutate(colder_vs_warmer_months = month(month_data) == "11" |
                                    month(month_data) == "12" |
@@ -63,7 +69,7 @@ baltimore_homicides %>%
              size = 1.3) +
   geom_text(aes(x = ymd("2015-4-1"), label = "Arrest of \nFreddie Gray", 
                 y = 40), colour = "gray80", hjust = "right") +
-  geom_smooth(span = 0.1 , se = FALSE) + 
+  geom_smooth(span = 0.1 , se = FALSE) + ## QUESTION 3
   labs(x = "Date",
        y = "Monthly homicides",
        title = "Homicides in Baltimore, MD",
