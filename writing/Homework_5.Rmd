@@ -15,8 +15,9 @@ knitr::opts_chunk$set(echo = TRUE, include = TRUE, warning = FALSE,
 
 ## HOMEWORK QUESTIONS:
 (1) What kind of information should be included in the README.md?
-(2) I rigged the dates to work in the graph. See line 45/46. Is this okay? Other ways of doing?
-(3) For geom_smooth, does this line need to be thicker? I can't get size to work. See line 72
+(2) I rigged the dates to work in the graph. See line 59/50. Is this okay? Other ways of doing? (Impacts my v_line in graph for Freddie)
+(3) For geom_smooth, does this line need to be thicker? I can't get size to work. See line 76
+(4) Cannot knit to PDF
 
 ## Read in Homicide Data
 
