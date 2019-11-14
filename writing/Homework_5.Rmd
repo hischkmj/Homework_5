@@ -34,7 +34,7 @@ unsolved <- homicides %>%
          year_data = year(reported_date)) %>% 
   group_by(month_data, year_data) %>% 
   summarize(total = n()) %>% 
-  arrange(year_data) %>% 
+  #arrange(year_data) %>% 
   mutate(date = paste(month_data, year_data, sep = "-1-"),
          date = mdy(date)) %>% 
   mutate(colder_vs_warmer_months = month(month_data) == "11" |
@@ -43,8 +43,7 @@ unsolved <- homicides %>%
                                    month(month_data) == "2"  |
                                    month(month_data) == "3"  |
                                    month(month_data) == "4") 
-  #mutate(date = as.factor(month_data, levels = month))
-         #year_data = as.factor(year_data))
+
   
   #mutate(colder_vs_warmer_months = as.factor(colder_vs_warmer_months)) #,
          #colder_vs_warmer_months = fct_recode(colder_vs_warmer_months,
