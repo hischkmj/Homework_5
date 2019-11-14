@@ -43,12 +43,10 @@ unsolved <- homicides %>%
                                    month(month_data) == "2"  |
                                    month(month_data) == "3"  |
                                    month(month_data) == "4") 
-
-  
-  #mutate(colder_vs_warmer_months = as.factor(colder_vs_warmer_months)) #,
-         #colder_vs_warmer_months = fct_recode(colder_vs_warmer_months,
-                                             # "Summer" = "FALSE",
-                                              #"Winter" = "TRUE"))
+  mutate(colder_vs_warmer_months = as.factor(colder_vs_warmer_months),
+         colder_vs_warmer_months = fct_recode(colder_vs_warmer_months,
+                                              "Summer" = "FALSE",
+                                              "Winter" = "TRUE"))
 
 
 ```
