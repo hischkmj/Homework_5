@@ -54,6 +54,6 @@ unsolved <- homicides %>%
 ## Homicides in Baltimore, MD Graph
 
 ```{r ggplot, fig.height = 2.5, fig.width = 10}
-
+library(ggplot2)
 ```
 
