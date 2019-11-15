@@ -8,3 +8,5 @@ output: html_document
 Homework_5.Rmd contains the code needed to complete R Programming for Researchers Homework #5. 
 
 The code recreates a graph (using homicide data in the United States) of the total number of homicides per month in Baltimore, MD. 
+
+The data is stored in the "data" folder. The RMD and final PDF is stored in the "writing" folder.
