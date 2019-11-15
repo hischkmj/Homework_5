@@ -13,12 +13,6 @@ knitr::opts_chunk$set(echo = TRUE, include = TRUE, warning = FALSE,
                       message = FALSE, errors = FALSE)
 ```
 
-## HOMEWORK QUESTIONS:
-(1) What kind of information should be included in the README.md?
-(2) I rigged the dates to work in the graph. See line 59/50. Is this okay? Other ways of doing? (Impacts my v_line in graph for Freddie)
-(3) For geom_smooth, does this line need to be thicker? I can't get size to work. See line 76
-(4) Cannot knit to PDF
-
 ## Read in Homicide Data
 
 ```{r Loading in Homicide Data}
@@ -46,14 +40,10 @@ baltimore_homicides <- homicides %>%
          year_data = year(reported_date)) %>% 
   group_by(month_data, year_data) %>% 
   summarize(total = n()) %>% 
-  mutate(date = paste(month_data, year_data, sep = "-1-"), ## QUESTION 2
+  mutate(date = paste(month_data, year_data, sep = "-15-"), 
          date = mdy(date)) %>% 
-  mutate(colder_vs_warmer_months = month(month_data) == "11" |
-                                   month(month_data) == "12" |
-                                   month(month_data) == "1"  |
-                                   month(month_data) == "2"  |
-                                   month(month_data) == "3"  |
-                                   month(month_data) == "4",
+  mutate(colder_vs_warmer_months = month(date) %in% c("11", "12", "1", 
+                                                      "2", "3", "4"),
          colder_vs_warmer_months = factor(colder_vs_warmer_months, 
                                           levels = c(FALSE, TRUE),
                                           labels = c("Summer", "Winter")))
@@ -63,17 +53,17 @@ baltimore_homicides <- homicides %>%
 
 ## Homicides in Baltimore, MD Graph
 
-```{r ggplot, fig.height = 2, fig.width = 8}
+```{r ggplot, fig.height = 3, fig.width = 10}
 library(ggplot2)
 
 baltimore_homicides %>% 
   ggplot(aes(x = date, y = total)) +
   geom_col(aes(fill = colder_vs_warmer_months)) +
-  geom_vline(xintercept = ymd("2015-4-1"), color = "red", linetype = 2, 
+  geom_vline(xintercept = ymd("2015-4-12"), color = "red", linetype = 2, 
              size = 1.3) +
-  geom_text(aes(x = ymd("2015-4-1"), label = "Arrest of \nFreddie Gray", 
+  geom_text(aes(x = ymd("2015-4-12"), label = "Arrest of \nFreddie Gray", 
                 y = 40), colour = "gray80", hjust = "right") +
-  geom_smooth(span = 0.1 , se = FALSE) + ## QUESTION 3
+  geom_smooth(span = 0.1 , se = FALSE) + 
   labs(x = "Date",
        y = "Monthly homicides",
        title = "Homicides in Baltimore, MD",
