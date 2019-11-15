@@ -8,3 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+Homework_5.Rmd contains the code needed to complete R Programming for Researchers Homework #5. 
+
+The code recreates a graph (using homicide data in the United States) of the total number of homicides per month in Baltimore, MD. 
